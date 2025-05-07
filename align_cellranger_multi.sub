@@ -1,0 +1,58 @@
+# Align_Cellranger_multi.sub
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# UPDATE THESE VARIABLES TO CUSTOMIZE THE RUN
+#
+# ** Changes often **
+# -- SUBMISSION_NAME: The name of the Cellranger run and name to append to the logs of this job
+SUBMISSION_NAME = H954KOALG_ECs_P5
+# -- SAMPLE_FOLDER_NAME: The name of the folder containing the fastq files that will be present after unzipping the tarball
+SAMPLE_FOLDER_NAME = H954KOALG-ECs-P5
+# -- SAMPLE_FILE_PATH: The path to the raw data tar.gz file to be transferred into CHTC (must be relative to submit node or absolute to staging node)
+SAMPLE_FILE_PATH = file:///staging/groups/surgery_brown_group/H954KOALG-ECs-P5.tar.gz
+#
+# ** Resource: Changes sometimes **
+TOTAL_DISK_SPACE = 512GB
+#
+# ** Changes rarely and file names may need to remain unchanged **
+# -- REFERENCE_GENOME_PATH: The path to the tar.gz of references. CAUTION: if cellranger_references.tar.gz has been recompiled, the executable must be updated because GRCh38 is hardcoded.
+REFERENCE_GENOME_PATH = file:///staging/groups/surgery_brown_group/cellranger_references.tar.gz
+# -- FEATURE_REFERENCE_PATH: The path to the feature_reference.csv file to be transferred into CHTC (must be relative to submit node or absolute to staging node)
+# -- -- WARNING: This file *MUST* exist whether it is needed in the multi_config.csv or not!
+FEATURE_REFERENCE_PATH = feature_reference.csv
+# -- MULTI_CONFIG_CSV_PATH: The path to the multi_config.csv file configured for this run to be transferred into CHTC (must be relative to submit node or absolute to staging node)
+MULTI_CONFIG_CSV_PATH = multi_config.csv
+# -- CELLRANGER_PATH: The path to the tar.gz file containing cellranger multi to be transferred into CHTC (must be relative to submit node or absolute to staging node)
+CELLRANGER_PATH = cellranger-8.0.0.tar.gz
+# -- CELLRANGER_DIR_NAME: The name of the cellranger folder inside the tarball.
+CELLRANGER_DIR_NAME = cellranger-8.0.0
+# -- UTILS: Comma separated paths to generate_multi.sh and rename_fastq.sh. File names must be the same and these are required for the alignment to succeed.
+UTILS = generate_multi.sh, rename_fastq.sh
+#
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#
+# STATIC SETTINGS
+universe = vanilla
+log = $(SUBMISSION_NAME)_cellranger-multi_$(Cluster).log
+output = $(SUBMISSION_NAME)_cellranger-multi_$(Cluster).out
+error = $(SUBMISSION_NAME)_cellranger-multi_$(Cluster).err
+requirements = (Target.HasCHTCStaging == True)
+notification = Always
+notify_user = wblashka@wisc.edu
+executable = align_cellranger_multi.sh
+arguments = $(SAMPLE_FILE_PATH) $(SAMPLE_FOLDER_NAME) $(REFERENCE_GENOME_PATH) $(FEATURE_REFERENCE_PATH) $(MULTI_CONFIG_CSV_PATH) $(CELLRANGER_PATH) $(SUBMISSION_NAME) $(CELLRANGER_DIR_NAME)
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+#
+# FILE TRANSFERS
+#
+transfer_input_files = $(MULTI_CONFIG_CSV_PATH), $(FEATURE_REFERENCE_PATH), $(CELLRANGER_PATH), $(UTILS), $(REFERENCE_GENOME_PATH), $(SAMPLE_FILE_PATH)
+transfer_output_files = cellranger_output.tar.gz
+transfer_output_remaps = "cellranger_output.tar.gz = file:///staging/groups/surgery_brown_group/$(SUBMISSION_NAME)_cellranger_output_$(Cluster).tar.gz"
+#
+#
+request_cpus = 8
+request_memory = 80GB 
+request_disk = $(TOTAL_DISK_SPACE)
+#
+queue

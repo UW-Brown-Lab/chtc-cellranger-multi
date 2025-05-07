@@ -1,0 +1,12 @@
+[gene-expression]
+create-bam,true
+reference,$PWD/cellranger_references/refdata-gex-GRCh38-2024-A
+
+[vdj]
+reference, $PWD/cellranger_references/refdata-cellranger-vdj-GRCh38-alts-ensembl-7.1.0
+
+[libraries]
+fastq_id,fastqs,feature_types
+H954KOALG-ECs-G,$PWD/H954KOALG-ECs-P5/gex,Gene Expression
+H954KOALG-ECs-T,$PWD/H954KOALG-ECs-P5/vdj,VDJ-T
+

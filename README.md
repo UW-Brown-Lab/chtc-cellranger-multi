@@ -26,7 +26,7 @@ This is the absolute path to the tar.gz file containing the references. This mus
 <details>
 <summary>CAUTION</summary>
 <br>
-If you need to update / repackage the references, the executable shell script will also need to be updated! Whether a consequence of laziness or simply because it does not seeem to be worth the time at present, the shell script is hardcoded around unpacking this particular reference file -- specifically concerning `refdata-gex-GRCh38-20240A.tar.gz` inside of the references tarball. If you change/update the references, this section of the `align_cellranger_multi.sh` file under `*****UNTAR REF DIR*****` will need to be updated.
+If you need to update / repackage the references, the executable shell script will also need to be updated! Whether a consequence of laziness or simply because it does not seeem to be worth the time at present, the shell script is hardcoded around unpacking this particular reference file -- specifically concerning <code>refdata-gex-GRCh38-20240A.tar.gz</code> inside of the references tarball. If you change/update the references, this section of the <code>align_cellranger_multi.sh</code> file under <code>*****UNTAR REF DIR*****</code> will need to be updated.
 </details>
 
 ### FEATURE_REFERENCE_PATH
@@ -38,7 +38,7 @@ This is the path to the feature_reference.csv file. **This argument must be prov
 <br>
 Generally, a feauture reference is needed for multimodal assays, such as antibody capture (Cell hashing).
 For more about how to format/structure the feature_reference.csv, visit 10X Genomics documentation available here:
-[Link](https://www.10xgenomics.com/support/software/cell-ranger/latest/analysis/inputs/cr-feature-ref-csv)
+<a href="https://www.10xgenomics.com/support/software/cell-ranger/latest/analysis/inputs/cr-feature-ref-csv">Link</a>
 </details>
 
 ### MULTI_CONFIG_CSV_PATH
@@ -47,8 +47,8 @@ This is the path to the multi_config.csv configured for this specific run. This 
 <details>
 <summary>More about Multi Config</summary>
 <br>
-The multi config is what must be adjusted every run to specify details about the sample and its fastq files. Cell Ranger requires absolute file paths, which we are unable to predict when using CHTC. Because of this, the utility scripts support using `$PWD` notation for the present working directory in the multi_config.csv file paths. Additional information about how to structure the rest of the config and the available options can be found in the 10X Genomics documentation available here:
-[Link](https://www.10xgenomics.com/support/software/cell-ranger/latest/advanced/cr-multi-config-csv-opts)
+The multi config is what must be adjusted every run to specify details about the sample and its fastq files. Cell Ranger requires absolute file paths, which we are unable to predict when using CHTC. Because of this, the utility scripts support using <code>$PWD</code> notation for the present working directory in the <code>multi_config.csv</code> file paths. Additional information about how to structure the rest of the config and the available options can be found in the 10X Genomics documentation available here:
+<a href="https://www.10xgenomics.com/support/software/cell-ranger/latest/advanced/cr-multi-config-csv-opts">Link</a>
 </details>
 
 ### CELLRANGER_PATH

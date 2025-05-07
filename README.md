@@ -73,3 +73,12 @@ The main role of this script is to replace all instances of `$PWD` in the `multi
 #### rename_fastq.sh
 I don't truthfully remember the *exact* problem this solves. This script replaces the illumina naming convention's sample number with `S1`. Cell Ranger is very strict on naming conventions, and I believe it expects all sample numbers from 1 to the number of samples present; I think it is intolerant of simply just processing sample 17, for example. This script solves this problem by iterating through the fastq files, finding the sample number with regex, and replacing it with `S1`.
 
+---
+
+<details>
+<summary>Note from the Author</summary>
+<br>
+I am well aware that this is not a perfect nor ideal solution, but I do believe that this makes performing the alignment <em>substantially</em> easier for very minimal development effort. I welcome my successors to improve this by containerizing it and generating the configuration programmtically. We'll call it a challenge left for the reader...
+</details>
+
+
